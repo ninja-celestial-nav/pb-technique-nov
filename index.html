@@ -45,6 +45,21 @@ main{z-index:1}
 #fx{display:block;width:100%;height:100%;pointer-events:none}
 .slide{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#bdb4a2 transparent}
 .slide.on{display:block}
+/* page-turn transition (View Transitions; ignored where unsupported or reduced motion) */
+.top{view-transition-name:vtop}.folio{view-transition-name:vfolio}#slides{view-transition-name:vpage}
+@media(prefers-reduced-motion:no-preference){
+::view-transition-group(vpage){animation-duration:.5s}
+::view-transition-old(vpage){animation:vtOut .38s cubic-bezier(.4,0,1,1) both}
+::view-transition-new(vpage){animation:vtIn .55s cubic-bezier(.16,1,.3,1) both}
+html[data-dir=back]::view-transition-old(vpage){animation-name:vtOutB}
+html[data-dir=back]::view-transition-new(vpage){animation-name:vtInB}
+::view-transition-group(pgh){animation-duration:.6s;animation-timing-function:cubic-bezier(.16,1,.3,1)}
+::view-transition-old(pgh),::view-transition-new(pgh){height:100%;object-fit:none;object-position:left top}
+@keyframes vtOut{to{opacity:0;transform:translateX(-36px)}}
+@keyframes vtIn{from{opacity:0;transform:translateX(56px);clip-path:inset(0 0 0 14%)}to{opacity:1;transform:none;clip-path:inset(0)}}
+@keyframes vtOutB{to{opacity:0;transform:translateX(36px)}}
+@keyframes vtInB{from{opacity:0;transform:translateX(-56px);clip-path:inset(0 14% 0 0)}to{opacity:1;transform:none;clip-path:inset(0)}}
+}
 .wrap{max-width:1180px;margin:0 auto;padding:38px 32px 80px}
 .folio{position:fixed;inset:auto 0 0 0;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-top:1px solid var(--ink);background:var(--paper);z-index:30;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
 .folio button{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:44px}
@@ -878,8 +893,25 @@ function render(){
 }
 
 /* ---------- navigation ---------- */
+var vtReady = false;
 function go(n, how, focusHead){
   n = Math.max(1, Math.min(N, parseInt(n, 10) || 1));
+  var from = cur;
+  var calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!vtReady || from === n || calm || !document.startViewTransition){ vtReady = true; return goNow(n, how, focusHead); }
+  var oldH = document.querySelector('.slide.on h1, .slide.on h2');
+  if (oldH) oldH.style.viewTransitionName = 'pgh';
+  document.documentElement.setAttribute('data-dir', n > from ? 'fwd' : 'back');
+  var t = document.startViewTransition(function(){
+    if (oldH) oldH.style.viewTransitionName = '';
+    goNow(n, how, focusHead);
+    var newH = document.querySelector('.slide.on h1, .slide.on h2');
+    if (newH) newH.style.viewTransitionName = 'pgh';
+  });
+  try { t.ready.catch(function(){}); t.updateCallbackDone.catch(function(){}); } catch (e) {}
+  t.finished.then(function(){ var h = document.querySelector('.slide.on h1, .slide.on h2'); if (h) h.style.viewTransitionName = ''; document.documentElement.removeAttribute('data-dir'); }, function(){});
+}
+function goNow(n, how, focusHead){
   cur = n;
   var all = document.querySelectorAll('.slide');
   for (var i = 0; i < all.length; i++) all[i].classList.remove('on');
