@@ -8,8 +8,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Serif+TC:wght@400;600;700;900&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700;1,900&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'QuoteFix';src:local('Georgia'),local('Times New Roman'),local('Liberation Serif'),local('DejaVu Serif');unicode-range:U+2018-201D}
 :root{--paper:#F4F0E7;--ink:#161513;--red:#A3311D;--redl:#E58B76;--mute:#6a645a;--soft:#E9E3D3;
---serif:'Noto Serif TC','Songti TC','PMingLiU',Georgia,serif;--disp:'Playfair Display',Georgia,'Times New Roman','Noto Serif TC',serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+--serif:'QuoteFix','Noto Serif TC','Songti TC','PMingLiU',Georgia,serif;--disp:'Playfair Display',Georgia,'Times New Roman','Noto Serif TC',serif;--mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow:hidden}
@@ -51,7 +52,9 @@ main{z-index:1}
 .folio span{text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* type */
-.mod .h1{word-break:keep-all;overflow-wrap:anywhere}
+.mod .h1{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
+.deck,.disc,.vid p,.notes li,.fault p,.legend li,.lede{text-wrap:pretty}
+html.en .mod .h1,html.en .h1{hyphens:manual}
 .hno{font-family:var(--disp);font-style:italic;font-weight:700;color:var(--red);margin-right:.08em}
 .h1{font-weight:900;font-size:clamp(30px,4.4vw,56px);line-height:1.15;letter-spacing:-.005em;text-wrap:balance}
 html.en .h1{font-family:var(--disp);line-height:1.08;letter-spacing:-.015em}
@@ -66,6 +69,8 @@ html.en .h1{font-family:var(--disp);line-height:1.08;letter-spacing:-.015em}
 .fault b{display:block;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:4px}
 .fault p{font-size:15px;line-height:1.65}
 .mod{display:grid;grid-template-columns:1.05fr .95fr;gap:0 52px}
+.featwide{grid-column:1/-1;margin-top:28px}
+@media(min-width:900px){.featwide .feature ol{columns:2;column-gap:40px}.featwide .feature li{break-inside:avoid}}
 .vid{display:grid;grid-template-columns:40px 1fr;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--ink)}
 .vn{font-family:var(--disp);font-style:italic;font-weight:700;font-size:34px;line-height:1;color:var(--red)}
 .vch{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
@@ -177,7 +182,8 @@ html.en .nextp strong{font-family:var(--disp)}
 
 /* court diagram */
 .court{margin-top:30px}
-.court svg.map{display:block;width:100%;max-width:440px;height:auto;margin-top:14px}
+@media(min-width:900px){.court{display:grid;grid-template-columns:minmax(0,340px) 1fr;column-gap:26px;align-items:start}.court figcaption,.court .src{grid-column:1/-1}.court .legend{margin-top:14px;align-self:center}.court.wide{display:block}.court.wide .legend{margin-top:10px}.court svg.map.tall{max-width:230px}}
+.court svg.map{display:block;width:100%;max-width:400px;height:auto;margin-top:14px}
 .legend{margin-top:10px}
 .legend li{display:flex;gap:12px;align-items:baseline;padding:5px 0;font-size:15.5px;line-height:1.6}
 .legend .sw{flex:none;width:34px;height:10px}
@@ -257,6 +263,9 @@ var IG = 'https://www.instagram.com/ninjapbtw/';
 var HAND = 'https://pickleball-ninja.vercel.app/';
 
 var UI = {
+  glT: ['名詞小註', 'Glossary'],
+  gl: ['RPO：Racket Professional Organization，球拍運動教練認證組織。DUPR：Dynamic Universal Pickleball Rating，通用的匹克球等級評分。USAP：USA Pickleball，美國匹克球的全國管理組織，有核准球拍名單。UPA-A：United Pickleball Association of America，職業賽事使用的球拍認證。', 'RPO: Racket Professional Organization, a coaching certification body for racket sports. DUPR: Dynamic Universal Pickleball Rating, a shared player rating. USAP: USA Pickleball, the national governing body, which keeps an approved-paddle list. UPA-A: United Pickleball Association of America, whose paddle certification applies to pro events.'],
+  gl2: ['認證縮寫：USAP 是美國全國管理組織的核准名單；UPA-A 是職業賽事使用的認證。業餘賽事多半看 USAP，購買前請確認你參加的賽事要求。', 'Approval labels: USAP is the national governing body’s approved list; UPA-A is the certification used at pro events. Amateur events mostly follow USAP, so check what your event requires before buying.'],
   issue: ['技術特輯 · 2026 年 11 月 · NinjaPB', 'Technique Edition · Nov 2026 · NinjaPB'],
   toc: ['目錄', 'Contents'],
   book: ['預約小班課', 'Book a lesson'],
@@ -279,7 +288,7 @@ function V(id, ch, t, zh, en){ return {id: id, ch: ch, t: t, c: [zh, en]}; }
 
 /* ---------- modules ---------- */
 var MODS = [
-{ no: 'I', nav: ['發球', 'Serve'],
+{ no: 'I', nav: ['發球', 'Serve'], fig: 'serve',
   h: ['發球：深度先於旋轉，旋轉先於速度', 'Serve: depth before spin, spin before speed'],
   deck: ['發球的第一個任務，是不要送給對手一顆好球。先求合法，再求深，最後才談變化。', 'The first job of a serve is to not hand your opponent an easy ball. Make it legal, then deep, then worry about variety.'],
   notes: [
@@ -347,7 +356,7 @@ var MODS = [
   ],
   fact: null
 },
-{ no: 'IV', nav: ['第三拍吊球', 'Third-shot drop'],
+{ no: 'IV', nav: ['第三拍吊球', 'Third-shot drop'], fig: 'drop',
   h: ['第三拍吊球：弧線頂點留在自己這一側', 'Third-shot drop: keep the apex on your side'],
   deck: ['吊球是把球送進廚房的安全橋樑：先站穩，再用肩膀與腿推送，不要靠手腕去挑。', 'The drop is the safe bridge into the kitchen: get set first, then push with the shoulder and legs instead of flicking the wrist.'],
   notes: [
@@ -397,7 +406,7 @@ var MODS = [
   fact: null
 },
 { no: 'VI', nav: ['挑擊與突擊', 'Flick & speed-up'],
-  h: ['挑擊與突擊：先過紅綠燈，再出手', 'Flick & speed-up: pass the traffic light first'],
+  h: ['挑擊與突擊：先過紅綠燈，再出手', 'Flick &amp; <span style="white-space:nowrap">speed-up</span>: pass the traffic light first'],
   deck: ['高度、平衡、時機都對，才值得加速；其他時候，耐心。', 'Speed up only when height, balance and timing all line up. Otherwise, be patient.'],
   feature: { t: ['決策紅綠燈：加速前的五個檢查點', 'Traffic light: five checks before you speed up'],
     items: [['球的高度：值得攻嗎？', 'Ball height: is it worth attacking?'],
@@ -455,7 +464,7 @@ var MODS = [
     s: [['https://usapickleball.org/what-is-pickleball/', 'USA Pickleball: what is pickleball'],
         ['https://www.pickleheads.com/blog/pickleball-net-height', 'Pickleheads: net height']] }
 },
-{ no: 'VIII', nav: ['截擊重置', 'Block & reset'],
+{ no: 'VIII', nav: ['截擊重置', 'Block & reset'], fig: 'reset',
   h: ['重置：卸力，不是迎擊', 'Reset: absorb the pace, don’t hit back'],
   deck: ['重置是被攻擊時的安全閥：站穩、放鬆握力，讓球軟軟地落回對方廚房。', 'The reset is your safety valve under attack: get set, loosen the grip and let the ball drop softly back into the kitchen.'],
   notes: [
@@ -604,7 +613,7 @@ function codeRow(buy){
 /* ---------- renderers ---------- */
 function cover(){
   var h = '<section class="slide" id="s1"><div class="wrap">';
-  h += '<div class="mast"><div class="issueline">' + T(UI.issue) + '</div><h1>The Paddle <i>Review</i></h1></div>';
+  h += '<div class="mast"><h1>The Paddle <i>Review</i></h1></div>';
   h += '<div class="cgrid"><div>';
   h += '<h2 class="h1">' + T(COVER.h) + '</h2><p class="deck">' + T(COVER.sub) + '</p>';
   h += '<p class="lede dropcap">' + T(COVER.lede) + '</p>';
@@ -623,6 +632,7 @@ function cover(){
   h += '<div class="card"><h3>' + T(COVER.coachT) + '</h3><p style="margin-top:0;font-size:16px">' + T(COVER.coachP) + '</p>' +
        '<a class="btn pill" href="' + BOOK + '" target="_blank" rel="noopener">' + T(COVER.coachB) + '</a></div>';
   h += '<div class="note"><div class="sec first" style="border:0;margin:0 0 4px;padding:0">' + T(COVER.edT) + '</div><p class="disc">' + T(COVER.ed) + '</p></div>';
+  h += '<div class="note"><div class="sec first" style="border:0;margin:0 0 4px;padding:0">' + T(UI.glT) + '</div><p class="disc">' + T(UI.gl) + '</p></div>';
   h += '</div></div>' + endRow(2, '') + '</div></section>';
   return h;
 }
@@ -645,14 +655,16 @@ function mod(m, i){
   var h = '<section class="slide" id="s' + (i + 2) + '"><div class="wrap"><div class="mod"><div>';
   h += '<h2 class="h1"><span class="hno">' + m.no + '</span> ' + T(m.h) + '</h2><p class="deck">' + T(m.deck) + '</p>';
   if (m.court) h += courtFig();
-  if (m.feature) h += feature(m.feature);
+  if (m.fig) h += FIGS[m.fig]();
   h += '<div class="sec">' + T(UI.coach) + '</div><ul class="notes">' +
     m.notes.map(function(x){ return '<li><span>—</span><span>' + T(x) + '</span></li>'; }).join('') + '</ul>';
   h += '<div class="fault"><div><b>' + T(UI.fault) + '</b><p>' + T(m.mis) + '</p></div><div><b>' + T(UI.fix) + '</b><p>' + T(m.fix) + '</p></div></div>';
   h += '</div><div>';
   h += '<div class="sec first">' + T(UI.watch) + '</div>' + m.vids.map(vid).join('');
   if (m.fact) h += fact(m.fact);
-  h += '</div></div>';
+  h += '</div>';
+  if (m.feature) h += '<div class="featwide">' + feature(m.feature) + '</div>';
+  h += '</div>';
   var nav = T(m.nav);
   h += endRow(i + 3, T(['想讓教練看你的' + nav + '？', 'Want a coach to watch your ' + nav.toLowerCase() + '? ']) +
     '<a href="' + BOOK + '" target="_blank" rel="noopener">' + T(['雙北小班課，慢動作錄影分析 →', 'Small-group lessons in Greater Taipei, with slow-motion video review →']) + '</a>');
@@ -673,6 +685,7 @@ function gear(){
     return s;
   }).join('');
   h += '</div>';
+  h += '<p class="disc" style="margin-top:14px">' + T(UI.gl2) + '</p>';
   h += '<div class="pull">' + T(GEAR.view) + '</div>';
   h += '<p class="disc" style="margin-top:14px">' + T(CORNER.perk) + '</p>';
   h += '<p class="disc" style="margin-top:8px">' + T(CORNER.disc) + '</p>';
@@ -757,6 +770,78 @@ function courtFig(){
     '<p class="src">' + T(['比例依 USA Pickleball 規格：球場寬 20 呎、廚房 7 呎、網高邊線處 36 吋、中央 34 吋；圖中只畫出網前各 10 呎。', 'Drawn to USA Pickleball dimensions: a 20 ft wide court, a 7 ft kitchen, and a net 36 in high at the sidelines and 34 in at the center. Only the 10 ft either side of the net is shown.']) +
     ' ' + A('https://usapickleball.org/what-is-pickleball/', 'USA Pickleball: what is pickleball') + '</p></figure>';
 }
+
+
+/* ---------- line drawings for serve / drop / reset ---------- */
+var FIGS = (function(){
+  var INK = '#161513', RED = '#A3311D', PAPER = '#F4F0E7';
+  function lab(x, y, txt, anchor, fill){
+    return '<text x="' + x + '" y="' + y + '" text-anchor="' + (anchor || 'start') + '" dominant-baseline="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" fill="' + (fill || INK) +
+      '" stroke="' + PAPER + '" stroke-width="4" stroke-linejoin="round" paint-order="stroke">' + txt + '</text>';
+  }
+  function labL(x, y, txt, anchor, fill){ return lab(x, y, txt, anchor, fill).replace('font-size="13"', 'font-size="16"'); }
+  var DEFS = '<defs><marker id="faR" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 9 5 0 9z" fill="' + RED + '"/></marker>' +
+    '<marker id="faK" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1 9 5 0 9z" fill="' + INK + '"/></marker></defs>';
+  function sw(dash, color, w){
+    return '<svg class="sw" viewBox="0 0 34 10" aria-hidden="true"><path d="M2 5H32" stroke="' + color + '" stroke-width="' + w + '"' + (dash ? ' stroke-dasharray="6 5"' : '') + '/></svg>';
+  }
+  function wrap(cap, svg, legend, note, key){
+    return '<figure class="court' + (key === 'serve' ? '' : ' wide') + '"><figcaption class="sec first">' + T(cap) + '</figcaption>' + svg +
+      '<ul class="legend">' + legend.map(function(l){ return '<li>' + sw(l[0], l[0] ? INK : RED, l[0] ? 1.6 : 2.6) + '<span>' + T(l[1]) + '</span></li>'; }).join('') + '</ul>' +
+      '<p class="src">' + T(note) + ' ' + A('https://usapickleball.org/what-is-pickleball/', 'USA Pickleball: what is pickleball') + '</p></figure>';
+  }
+  /* side view of one half-court pair around the net; ground y=300, net x=200; 7 ft = 90 px; net ~ 34 in => 52 px */
+  function side(){
+    return '<rect x="110" y="300" width="180" height="6" fill="#E9E3D3"/>' +
+      '<path d="M20 300H380" stroke="' + INK + '" stroke-width="1.5"/>' +
+      '<path d="M200 300V246" stroke="' + INK + '" stroke-width="3"/><path d="M200 246h0" stroke="' + INK + '"/>' +
+      '<path d="M110 300v12M290 300v12" stroke="' + INK + '" stroke-width="1"/>' +
+      lab(200, 330, T(['廚房 7 呎 ← 球網 → 廚房 7 呎', 'Kitchen 7 ft ← net → kitchen 7 ft']), 'middle') +
+      '<circle cx="64" cy="262" r="0"/>';
+  }
+  function serve(){
+    var svg = '<svg class="map tall" viewBox="60 10 280 410" role="img" aria-labelledby="fsT fsD"><title id="fsT">' + T(['發球落點示意圖', 'Diagram: where a serve should land']) + '</title>' +
+      '<desc id="fsD">' + T(['俯視整個球場。你站在底線後方的右側，球斜對角飛過網，落進對角的發球區，越靠近底線越好。', 'Top-down view of the full court. You stand behind the baseline on the right; the ball travels diagonally over the net into the opposite service court, ideally close to the baseline.']) + '</desc>' + DEFS +
+      '<rect x="120" y="30" width="80" height="120" fill="#E9E3D3"/>' +
+      '<rect x="120" y="30" width="160" height="352" fill="none" stroke="' + INK + '" stroke-width="1.5"/>' +
+      '<path d="M200 30V150M200 262V382M120 150H280M120 262H280" stroke="' + INK + '" stroke-width="1"/>' +
+      '<path d="M108 206H292" stroke="' + INK + '" stroke-width="3.5"/>' +
+      '<path d="M252 396 168 56" fill="none" stroke="' + RED + '" stroke-width="2.6" marker-end="url(#faR)"/>' +
+      '<circle cx="256" cy="402" r="8" fill="' + INK + '"/>' +
+      labL(100, 206, T(['網', 'Net']), 'end') +
+      labL(210, 98, T(['落點', 'Target']), 'start') +
+      labL(270, 412, T(['你', 'You']), 'start') +
+      '</svg>';
+    return wrap(['發球的落點', 'Where the serve should land'], svg, [[false, ['發球必須斜對角、落進對面的發球區；本刊的建議是壓向底線附近。', 'A serve must travel diagonally into the opposite service court; our advice is to aim for the area near the baseline.']]],
+      ['示意圖不依比例；規則：發球斜對角落入對方發球區，且不能落在廚房內。', 'Schematic, not to scale. Rule: the serve goes diagonally into the opposite service court and may not land in the kitchen.'], 'serve');
+  }
+  function drop(){
+    var svg = '<svg class="map" viewBox="0 150 400 200" role="img" aria-labelledby="fdT fdD"><title id="fdT">' + T(['吊球弧線側視圖', 'Side view: the drop arc']) + '</title>' +
+      '<desc id="fdD">' + T(['側視圖：吊球從你這側起飛，弧線頂點在你這側的球網前方，過網後下墜並落進對方廚房。', 'Side view: the drop leaves your side, peaks on your side of the net, then falls into the opponent’s kitchen.']) + '</desc>' + DEFS + side() +
+      '<path d="M96 262 C130 180 176 176 200 206 S260 292 262 296" fill="none" stroke="' + RED + '" stroke-width="2.6" marker-end="url(#faR)"/>' +
+      '<path d="M96 262 C190 258 250 252 262 292" fill="none" stroke="' + INK + '" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#faK)"/>' +
+      '<circle cx="80" cy="268" r="9" fill="' + INK + '"/>' +
+      lab(80, 292, T(['你', 'You']), 'middle') +
+      lab(150, 168, T(['頂點留在自己這側', 'Apex on your side'])) +
+      '</svg>';
+    return wrap(['吊球的弧線', 'The drop arc'], svg, [[false, ['吊球：頂點在自己這側，過網後下墜，落進對方廚房。', 'Drop: the apex is on your side, the ball falls after the net and lands in the opponent’s kitchen.']], [true, ['平射的抽球：速度快、弧線低，但很難留在廚房裡。', 'A flat, driven ball: faster and lower, but hard to keep in the kitchen.']]],
+      ['側視示意圖，高度未依比例；廚房為球網兩側各 7 呎。', 'Side-view schematic, height not to scale; the kitchen is 7 ft either side of the net.'], 'drop');
+  }
+  function reset(){
+    var svg = '<svg class="map" viewBox="0 150 400 200" role="img" aria-labelledby="frT frD"><title id="frT">' + T(['重置的球路側視圖', 'Side view: the reset']) + '</title>' +
+      '<desc id="frD">' + T(['側視圖：對手的快球從對面飛來；你把拍面當墊子，球只輕輕越過網頂，落進對方廚房。', 'Side view: the opponent’s fast ball arrives; you use the paddle as a cushion and the ball just clears the net into their kitchen.']) + '</desc>' + DEFS + side() +
+      '<path d="M340 252 L128 282" fill="none" stroke="' + INK + '" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#faK)"/>' +
+      '<path d="M120 284 C150 236 196 226 226 244 S262 290 264 296" fill="none" stroke="' + RED + '" stroke-width="2.6" marker-end="url(#faR)"/>' +
+      '<circle cx="100" cy="286" r="9" fill="' + INK + '"/>' +
+      lab(100, 312, T(['你', 'You']), 'middle').replace('y="312"', 'y="310"') +
+      lab(352, 230, T(['對方快球', 'Their drive']), 'end') +
+      lab(150, 218, T(['軟軟越過網頂', 'Barely clear the net'])) +
+      '</svg>';
+    return wrap(['重置的球路', 'The reset path'], svg, [[false, ['重置：卸掉來球的力量，球低低越過網頂，落進對方廚房。', 'Reset: absorb the pace so the ball clears the net low and lands in the kitchen.']], [true, ['對方的快球：你要讓它的速度在你的拍面上消失。', 'Their fast ball: let its pace disappear into your paddle face.']]],
+      ['側視示意圖，高度未依比例；廚房為球網兩側各 7 呎。', 'Side-view schematic, height not to scale; the kitchen is 7 ft either side of the net.'], 'reset');
+  }
+  return { serve: serve, drop: drop, reset: reset };
+})();
 
 function toc(){
   var rows = [['', T(['封面', 'Cover']), 1]];
