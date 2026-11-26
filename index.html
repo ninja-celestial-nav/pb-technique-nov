@@ -15,19 +15,26 @@ html,body{height:100%}
 body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow:hidden}
 a{color:inherit}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.dark :focus-visible{outline-color:var(--redl)}
+[tabindex="-1"]:focus{outline:none}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+.ico{display:block;width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 ul{list-style:none}
 
 /* chrome */
 .top{position:fixed;inset:0 0 auto 0;height:52px;display:flex;align-items:center;gap:18px;padding:0 24px;background:var(--paper);border-bottom:1px solid var(--ink);z-index:30}
-.brand{font-family:var(--disp);font-weight:700;font-size:19px;white-space:nowrap;cursor:pointer;text-decoration:none}
+.brand{display:inline-flex;align-items:center;gap:.26em;min-height:44px;font-family:var(--disp);font-weight:700;font-size:19px;white-space:nowrap;cursor:pointer;text-decoration:none}
 .brand i,.mast h1 i{color:var(--red);font-style:italic}
-.issue{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.issue{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .top nav{display:flex;align-items:center;gap:10px}
 .btn{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.04em;border:1px solid var(--ink);padding:5px 11px;border-radius:2px;line-height:1.3;text-decoration:none;white-space:nowrap;color:inherit}
 .btn:hover{background:var(--ink);color:var(--paper)}
 .pill{background:var(--red);color:#fff;border-color:var(--red);border-radius:99px}
 .pill:hover{background:#7f2515;border-color:#7f2515;color:#fff}
 .short{display:none}
+.top .btn{min-height:34px;display:inline-flex;align-items:center;justify-content:center}
 .prog{position:fixed;top:52px;left:0;right:0;height:2px;z-index:30}
 .prog b{display:block;height:2px;background:var(--red);width:0;transition:width .3s}
 main,#fxw{position:fixed;inset:54px 0 46px 0}
@@ -35,39 +42,40 @@ main,#fxw{position:fixed;inset:54px 0 46px 0}
 main{z-index:1}
 #fxw{z-index:2;pointer-events:none}
 #fx{display:block;width:100%;height:100%;pointer-events:none}
-.slide{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden}
+.slide{display:none;position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:#bdb4a2 transparent}
 .slide.on{display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:38px 32px 80px}
-.folio{position:fixed;inset:auto 0 0 0;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-top:1px solid var(--ink);background:var(--paper);z-index:30;font-family:var(--mono);font-size:12px;letter-spacing:.06em}
-.folio button{font-size:22px;padding:2px 14px;line-height:1}
+.folio{position:fixed;inset:auto 0 0 0;height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-top:1px solid var(--ink);background:var(--paper);z-index:30;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+.folio button{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:44px}
 .folio button:disabled{opacity:.25;cursor:default}
 .folio span{text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* type */
-.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:12px}
+.mod .h1{word-break:keep-all;overflow-wrap:anywhere}
+.hno{font-family:var(--disp);font-style:italic;font-weight:700;color:var(--red);margin-right:.08em}
 .h1{font-weight:900;font-size:clamp(30px,4.4vw,56px);line-height:1.15;letter-spacing:-.005em;text-wrap:balance}
 html.en .h1{font-family:var(--disp);line-height:1.08;letter-spacing:-.015em}
 .deck{font-size:18px;color:#3b372f;margin:16px 0 0;max-width:33em}
-.sec{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;border-bottom:2px solid var(--ink);padding-bottom:6px;margin:34px 0 0}
+.sec{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;border-bottom:2px solid var(--ink);padding-bottom:6px;margin:34px 0 0}
 .sec.first{margin-top:0}
 .notes li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--ink);font-size:16px}
 .notes li span:first-child{font-family:var(--mono);color:var(--red)}
 .fault{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--ink);margin-top:28px}
 .fault>div{padding:14px 18px}
 .fault>div+div{border-left:1px solid var(--ink)}
-.fault b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:4px}
+.fault b{display:block;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:4px}
 .fault p{font-size:15px;line-height:1.65}
 .mod{display:grid;grid-template-columns:1.05fr .95fr;gap:0 52px}
 .vid{display:grid;grid-template-columns:40px 1fr;gap:4px 12px;padding:16px 0;border-bottom:1px solid var(--ink)}
 .vn{font-family:var(--disp);font-style:italic;font-weight:700;font-size:34px;line-height:1;color:var(--red)}
-.vch{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.vch{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
 .vt{font-family:var(--disp);font-style:italic;font-weight:500;font-size:19px;line-height:1.3;margin:3px 0 6px}
 .vid p{font-size:14.5px;line-height:1.65;color:#3b372f}
-.vl{display:inline-block;margin-top:7px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--red);text-decoration:underline;text-underline-offset:3px}
+.vl{display:inline-flex;align-items:center;min-height:44px;margin-top:2px;font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--red);text-decoration:underline;text-underline-offset:3px}
 .fact{background:var(--soft);border-left:3px solid var(--red);padding:16px 20px;margin-top:28px;font-size:15px}
-.fact b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:4px}
+.fact b{display:block;font-family:var(--mono);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);font-weight:500;margin-bottom:4px}
 .fact p{line-height:1.7}
-.src{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--mute);margin-top:10px}
+.src{font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--mute);margin-top:10px}
 .src a{color:var(--mute)}
 .feature{background:var(--ink);color:var(--paper);padding:24px 28px;margin-top:28px}
 .feature h3{font-family:var(--serif);font-weight:700;font-size:19px;line-height:1.4;margin-bottom:10px}
@@ -85,36 +93,36 @@ html.en .feature h3{font-family:var(--disp)}
 .lede{margin-top:22px;font-size:17px;max-width:36em}
 .dropcap::first-letter{float:left;font-family:var(--disp);font-weight:900;font-size:4.2em;line-height:.82;padding:.05em .1em 0 0;color:var(--red)}
 .lines{margin-top:26px}
-.cl{display:grid;grid-template-columns:48px 1fr auto;align-items:baseline;gap:8px;padding:10px 0;border-top:1px solid var(--ink);cursor:pointer;text-decoration:none}
+.cl{display:grid;grid-template-columns:48px 1fr auto;align-items:baseline;gap:8px;padding:11px 0;min-height:48px;border-top:1px solid var(--ink);cursor:pointer;text-decoration:none}
 .cl:last-child{border-bottom:1px solid var(--ink)}
 .cl i{font-family:var(--disp);font-style:italic;font-weight:700;color:var(--red);font-size:22px}
 .cl span{font-weight:600}
-.cl em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--mute)}
+.cl em{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--mute)}
 .cl:hover span{color:var(--red)}
 .card{border:1px solid var(--ink);padding:20px 22px;margin-bottom:22px;background:rgba(255,255,255,.4)}
-.card h3{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--mute);margin-bottom:8px}
+.card h3{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--mute);margin-bottom:8px}
 .codebig{font-family:var(--mono);font-weight:500;font-size:42px;letter-spacing:.16em;color:var(--red);line-height:1.1}
 .card p{font-size:14.5px;line-height:1.65;margin:8px 0 12px}
 .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.disc{font-family:var(--mono);font-size:11.5px;line-height:1.65;color:var(--mute)}
+.disc{font-family:var(--mono);font-size:13px;line-height:1.65;color:var(--mute)}
 .note{border-top:1px solid var(--ink);margin-top:24px;padding-top:12px}
 
 /* gear */
 .gear{display:grid;grid-template-columns:1fr 1fr;gap:0 52px;margin-top:8px}
 .pad{border-top:2px solid var(--ink);padding:18px 0 26px}
 .pad h3{font-family:var(--disp);font-weight:900;font-size:26px;line-height:1.2}
-.pad .tag{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:4px 0 8px}
+.pad .tag{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:4px 0 8px}
 .spec{display:grid;grid-template-columns:82px 1fr;gap:4px 14px;font-size:14.5px;line-height:1.6;margin:10px 0}
-.spec dt{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding-top:3px}
+.spec dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);padding-top:3px}
 .coderow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px;padding:10px 12px;border:1px dashed var(--ink)}
 .coderow b{font-family:var(--mono);font-weight:500;letter-spacing:.14em;color:var(--red)}
 .pull{font-family:var(--serif);font-weight:700;font-size:clamp(22px,3vw,34px);line-height:1.4;border-left:4px solid var(--red);padding:4px 0 4px 22px;margin:34px 0 8px}
 html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
-.pullby{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-left:26px}
+.pullby{font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);padding-left:26px}
 
 /* corner (dark) */
-.slide.dark{background:var(--ink);color:var(--paper)}
-.dark .kicker{color:var(--redl)}
+.slide.dark{background:var(--ink);color:var(--paper);scrollbar-color:#4a463e transparent}
+.dark .pullby{color:#b9b3a5}
 .dark .deck{color:#cfc9ba}
 .dark .sec{border-color:var(--paper)}
 .dark .btn{border-color:var(--paper)}
@@ -125,7 +133,7 @@ html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
 .price{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--paper);margin:12px 0}
 .price div{padding:16px 10px;text-align:center}
 .price div+div{border-left:1px solid var(--paper)}
-.price small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#b9b3a5}
+.price small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#b9b3a5}
 .price strong{display:block;font-family:var(--disp);font-weight:900;font-size:30px;line-height:1.2}
 .dark ul.plain li{padding:9px 0;border-top:1px solid #4a463e;font-size:15px;display:flex;gap:12px}
 .dark ul.plain li span:first-child{font-family:var(--mono);color:var(--redl);flex:none;min-width:3.4em}
@@ -134,7 +142,7 @@ html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
 .drill p{font-size:14.5px;line-height:1.65;color:#cfc9ba}
 .dark .codewrap{border:1px solid var(--paper);padding:18px 20px;margin-top:20px}
 .dark .codebig{color:var(--redl)}
-.srcs{columns:2;column-gap:40px;font-family:var(--mono);font-size:11px;line-height:1.7;color:#b9b3a5;margin-top:10px}
+.srcs{columns:2;column-gap:40px;font-family:var(--mono);font-size:13px;line-height:1.7;color:#b9b3a5;margin-top:10px}
 .srcs a{display:block;margin-bottom:4px;break-inside:avoid;color:#b9b3a5}
 
 /* toc */
@@ -145,8 +153,39 @@ html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
 .toc a{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:baseline;padding:12px 0;border-top:1px solid var(--ink);text-decoration:none;cursor:pointer;font-weight:600;font-size:19px}
 .toc a:last-child{border-bottom:1px solid var(--ink)}
 .toc a i{font-family:var(--disp);font-style:italic;font-weight:700;color:var(--red)}
-.toc a em{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--mute);font-weight:400}
+.toc a em{font-family:var(--mono);font-style:normal;font-size:12px;color:var(--mute);font-weight:400}
 .toc a:hover{color:var(--red)}
+.toch{font-family:var(--disp);font-weight:900;font-size:clamp(28px,4vw,40px);line-height:1.1;margin-bottom:18px}
+.toc a[aria-current="page"]{color:var(--red)}
+.toc a[aria-current="page"] em::after{content:' · 目前'}
+html.en .toc a[aria-current="page"] em::after{content:' · current'}
+
+/* page endings */
+.endrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,400px);gap:18px 40px;align-items:center;margin-top:52px;padding-top:22px;border-top:2px solid var(--ink)}
+.endrow.solo{grid-template-columns:minmax(280px,400px);justify-content:end}
+.invite{font-size:17px;line-height:1.65;max-width:34em}
+.invite a{color:var(--red);font-weight:600}
+.nextp{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:68px;padding:14px 20px;border:1px solid var(--ink);text-decoration:none}
+.nextp small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.nextp strong{display:block;font-size:21px;font-weight:700;line-height:1.3}
+html.en .nextp strong{font-family:var(--disp)}
+.nextp strong i{font-family:var(--disp);font-style:italic;color:var(--red);margin-right:.15em}
+.nextp .ico{flex:none;width:26px;height:26px}
+.nextp:hover{background:var(--ink);color:var(--paper)}
+.nextp:hover small{color:#cfc9ba}
+.nextp:hover strong i{color:var(--redl)}
+
+/* court diagram */
+.court{margin-top:30px}
+.court svg.map{display:block;width:100%;max-width:440px;height:auto;margin-top:14px}
+.legend{margin-top:10px}
+.legend li{display:flex;gap:12px;align-items:baseline;padding:5px 0;font-size:15.5px;line-height:1.6}
+.legend .sw{flex:none;width:34px;height:10px}
+
+/* coach's corner offer */
+.btn.big{display:inline-flex;align-items:center;min-height:52px;padding:12px 26px;font-size:16px;letter-spacing:.02em;margin-top:24px}
+.alt{margin-top:14px;font-size:15.5px;color:#cfc9ba}
+.alt a{color:var(--paper)}
 
 @media (max-width:820px){
  .wrap{padding:24px 18px 70px}
@@ -154,7 +193,15 @@ html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
  .brand{font-size:16px}
  .issue{display:none}
  .top nav{margin-left:auto;gap:8px}
- .long{display:none}.short{display:inline}
+ .long{display:none}.short{display:inline-flex;align-items:center}
+ .top .btn,.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;padding:8px 13px}
+ main,#fxw{bottom:52px}
+ .folio{height:52px}
+ .src a{display:inline-flex;align-items:center;min-height:44px}
+ .srcs a{display:flex;align-items:center;min-height:44px;margin:0}
+ .fault p,.fact,.vid p,.drill p,.card p{font-size:16px}
+ .endrow,.endrow.solo{grid-template-columns:1fr;margin-top:40px}
+ .btn.big{width:100%;justify-content:center}
  .mod,.cgrid,.gear,.cgrid2{grid-template-columns:1fr}
  .fault{grid-template-columns:1fr}
  .fault>div+div{border-left:0;border-top:1px solid var(--ink)}
@@ -169,11 +216,11 @@ html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
 </head>
 <body>
 <header class="top">
-  <a class="brand" data-go="1">The Paddle <i>Review</i></a>
+  <a class="brand" href="#1" data-go="1">The Paddle <i>Review</i></a>
   <span class="issue" id="issue"></span>
   <nav>
     <button class="btn" id="lang" aria-label="Language"></button>
-    <button class="btn" id="tocBtn"></button>
+    <button class="btn" id="tocBtn" aria-haspopup="dialog" aria-expanded="false" aria-controls="toc"></button>
     <a class="btn pill" id="book" href="https://ninjapb.vercel.app/" target="_blank" rel="noopener"></a>
   </nav>
 </header>
@@ -181,11 +228,11 @@ html.en .pull{font-family:var(--disp);font-style:italic;font-weight:500}
 <main id="slides"></main>
 <div id="fxw" aria-hidden="true"><canvas id="fx"></canvas></div>
 <footer class="folio">
-  <button id="prev" aria-label="Previous">‹</button>
-  <span id="fol"></span>
-  <button id="next" aria-label="Next">›</button>
+  <button id="prev" aria-label="上一頁"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5"/></svg></button>
+  <span id="fol" aria-live="polite" aria-atomic="true"></span>
+  <button id="next" aria-label="下一頁"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5"/></svg></button>
 </footer>
-<div class="toc" id="toc"></div>
+<div class="toc" id="toc" role="dialog" aria-modal="true" aria-labelledby="tocH"></div>
 
 <script>
 /* ---------- language ---------- */
@@ -212,7 +259,10 @@ var HAND = 'https://pickleball-ninja.vercel.app/';
 var UI = {
   issue: ['技術特輯 · 2026 年 11 月 · NinjaPB', 'Technique Edition · Nov 2026 · NinjaPB'],
   toc: ['目錄', 'Contents'],
-  book: ['預約教練課', 'Book a lesson'],
+  book: ['預約小班課', 'Book a lesson'],
+  next: ['下一個技術', 'Next technique'],
+  nextPage: ['下一頁', 'Next page'],
+  start: ['開始閱讀', 'Start reading'],
   coach: ['教練提示', "Coach's notes"],
   fault: ['常見盲點', 'Common fault'],
   fix: ['矯正', 'Fix'],
@@ -221,7 +271,7 @@ var UI = {
   copy: ['複製折扣碼', 'Copy code'],
   copied: ['已複製', 'Copied'],
   buy: ['前往購買 ↗', 'Shop ↗'],
-  close: ['關閉', 'Close']
+  close: ['關閉目錄', 'Close contents']
 };
 
 /* ---------- video helper ---------- */
@@ -230,7 +280,6 @@ function V(id, ch, t, zh, en){ return {id: id, ch: ch, t: t, c: [zh, en]}; }
 /* ---------- modules ---------- */
 var MODS = [
 { no: 'I', nav: ['發球', 'Serve'],
-  k: ['MODULE 01 · 發球', 'MODULE 01 · SERVE'],
   h: ['發球：深度先於旋轉，旋轉先於速度', 'Serve: depth before spin, spin before speed'],
   deck: ['發球的第一個任務，是不要送給對手一顆好球。先求合法，再求深，最後才談變化。', 'The first job of a serve is to not hand your opponent an easy ball. Make it legal, then deep, then worry about variety.'],
   notes: [
@@ -257,7 +306,6 @@ var MODS = [
         ['https://www.dupr.com/post/how-high-can-you-make-contact-with-the-ball-before-it-becomes-illegal', 'DUPR: contact height']] }
 },
 { no: 'II', nav: ['回發球', 'Return'],
-  k: ['MODULE 02 · 回發球', 'MODULE 02 · RETURN OF SERVE'],
   h: ['回發球：先把自己送上廚房線', 'Return: get yourself to the kitchen line'],
   deck: ['回球的目的不是打 Winner，而是用又深又穩的球換取時間，和搭檔一起搶到廚房線。', 'A return is not about hitting a winner. It is about buying time with a deep, steady ball so you and your partner can take the kitchen line.'],
   notes: [
@@ -279,7 +327,6 @@ var MODS = [
   fact: null
 },
 { no: 'III', nav: ['第三拍抽球', 'Third-shot drive'],
-  k: ['MODULE 03 · 第三拍抽球', 'MODULE 03 · THIRD-SHOT DRIVE'],
   h: ['第三拍抽球：不是賭 Winner，是替第五拍鋪路', 'Third-shot drive: not a winner, a setup for the fifth ball'],
   deck: ['抽球是建立優勢的過渡手段：球要低、要有旋轉，打完人要往前。', 'The drive is a bridge to an advantage: keep it low, put spin on it, and move forward after you hit it.'],
   notes: [
@@ -301,7 +348,6 @@ var MODS = [
   fact: null
 },
 { no: 'IV', nav: ['第三拍吊球', 'Third-shot drop'],
-  k: ['MODULE 04 · 第三拍吊球', 'MODULE 04 · THIRD-SHOT DROP'],
   h: ['第三拍吊球：弧線頂點留在自己這一側', 'Third-shot drop: keep the apex on your side'],
   deck: ['吊球是把球送進廚房的安全橋樑：先站穩，再用肩膀與腿推送，不要靠手腕去挑。', 'The drop is the safe bridge into the kitchen: get set first, then push with the shoulder and legs instead of flicking the wrist.'],
   notes: [
@@ -324,7 +370,6 @@ var MODS = [
         ['https://pickleballunion.com/pickleball-lower-drops-guide/', 'Pickleball Union: lower drops guide']] }
 },
 { no: 'V', nav: ['滾截擊', 'Roll volley'],
-  k: ['MODULE 05 · 滾截擊 / 上旋推球', 'MODULE 05 · ROLL VOLLEY'],
   h: ['滾截擊：用旋轉過網，不要用蠻力', 'Roll volley: spin it over, don’t muscle it'],
   deck: ['球在網帶附近時，引拍要小、拍面微扣，往前滾出一顆會下墜的球。', 'When the ball is near net height, keep the backswing small, tilt the face slightly and roll through to a ball that dips.'],
   notes: [
@@ -352,7 +397,6 @@ var MODS = [
   fact: null
 },
 { no: 'VI', nav: ['挑擊與突擊', 'Flick & speed-up'],
-  k: ['MODULE 06 · 挑擊 / 網前加速突擊', 'MODULE 06 · FLICK & SPEED-UP'],
   h: ['挑擊與突擊：先過紅綠燈，再出手', 'Flick & speed-up: pass the traffic light first'],
   deck: ['高度、平衡、時機都對，才值得加速；其他時候，耐心。', 'Speed up only when height, balance and timing all line up. Otherwise, be patient.'],
   feature: { t: ['決策紅綠燈：加速前的五個檢查點', 'Traffic light: five checks before you speed up'],
@@ -383,8 +427,7 @@ var MODS = [
   ],
   fact: null
 },
-{ no: 'VII', nav: ['丁克', 'Dink'],
-  k: ['MODULE 07 · 非截擊區小球丁克', 'MODULE 07 · DINK & KITCHEN PLAY'],
+{ no: 'VII', nav: ['丁克', 'Dink'], court: true,
   h: ['丁克：耐心是一種戰術', 'Dinking: patience is a tactic'],
   deck: ['丁克不是等對手失誤，而是用深度、角度與旋轉，一步步把對手拉出舒服的位置。', 'Dinking is not waiting for a mistake. It is using depth, angle and spin to pull your opponent out of position, one ball at a time.'],
   notes: [
@@ -413,7 +456,6 @@ var MODS = [
         ['https://www.pickleheads.com/blog/pickleball-net-height', 'Pickleheads: net height']] }
 },
 { no: 'VIII', nav: ['截擊重置', 'Block & reset'],
-  k: ['MODULE 08 · 截擊阻擋與軟手重置', 'MODULE 08 · BLOCK & RESET'],
   h: ['重置：卸力，不是迎擊', 'Reset: absorb the pace, don’t hit back'],
   deck: ['重置是被攻擊時的安全閥：站穩、放鬆握力，讓球軟軟地落回對方廚房。', 'The reset is your safety valve under attack: get set, loosen the grip and let the ball drop softly back into the kitchen.'],
   notes: [
@@ -485,13 +527,11 @@ var GEAR = {
       buy: REF }
   ],
   view: ['Coach Ninja 的觀點：許多卡在 DUPR 3.5 的學員，缺的不是力量，而是軟手與落點的判斷。', 'Coach Ninja’s view: many players stuck at DUPR 3.5 are not short on power. What they lack is soft hands and placement judgment.'],
-  who: ['— Coach Ninja', '— Coach Ninja'],
-  perk: ['結帳輸入折扣碼 NINJA 享 9 折。是否能與官網促銷併用，以官網結帳頁為準。', 'Enter code NINJA at checkout for 10% off. Whether it stacks with store promotions is decided by the store’s checkout page.']
+  who: ['— Coach Ninja', '— Coach Ninja']
 };
 
 /* ---------- coach's corner ---------- */
 var CORNER = {
-  kick: ["COACH'S CORNER · 教練課程", "COACH'S CORNER"],
   h: ['跟 Coach Ninja 上小班課', 'Train with Coach Ninja'],
   deck: ['NinjaPB Performance Academy 創辦人 · RPO Level 1 國際匹克球教練 · Six Zero 官方品牌推廣大使 · 雙北', 'Founder of NinjaPB Performance Academy · RPO Level 1 international pickleball coach · Six Zero brand ambassador · Greater Taipei'],
   priceT: ['小班課 · 每人每堂（60 分鐘）', 'Small-group lessons · per person, 60 minutes'],
@@ -511,9 +551,9 @@ var CORNER = {
     [['吊球握力檢查', 'Grip-pressure check on drops'], ['每一球都問自己：握力有到約 3/10 嗎？握得越緊，球飛得越遠。', 'On every ball, ask whether your grip is near a 3 out of 10. The tighter you squeeze, the farther the ball goes.']],
     [['Work-up 重置練習', 'Work-up reset drill'], ['一人在廚房線持續施壓截擊，另一人在轉換區每球都做軟重置；每成功一球就往前一小步，直到站上廚房線。', 'One player volleys steadily at the kitchen line while the other resets softly from the transition zone, taking one small step forward after each good reset until reaching the kitchen line.']]
   ],
-  perkT: ['學員專屬優惠', 'Student perk'],
   perk: ['Six Zero 官網結帳輸入 NINJA 享 9 折。折扣碼不會因為點推薦連結而自動套用，請在結帳頁手動輸入。是否能與官網促銷併用，以結帳頁為準。', 'Enter NINJA at the Six Zero store checkout for 10% off. The referral link does not apply the code automatically, so type it in at checkout. Whether it stacks with store promotions is decided by the checkout page.'],
   quote: ['打得漂亮不如打得合理，打得用力不如打得放鬆。', 'Playing sensibly beats playing pretty, and playing relaxed beats playing hard.'],
+  disc2: ['揭露：Coach Ninja 是 Six Zero 官方品牌推廣大使。教學內容為一般性的訓練建議，成效因人而異。', 'Disclosure: Coach Ninja is an official Six Zero brand ambassador. Coaching content is general training advice, and results vary.'],
   disc: ['揭露：Coach Ninja 是 Six Zero 官方品牌推廣大使。本頁的 NINJA 折扣碼與 Six Zero 連結是他的推廣連結。教學內容為一般性的訓練建議，成效因人而異。', 'Disclosure: Coach Ninja is an official Six Zero brand ambassador. The NINJA code and the Six Zero links on this page are his promotional links. Coaching content is general training advice, and results vary.'],
   srcT: ['資料來源', 'Sources'],
   srcs: [
@@ -532,7 +572,6 @@ var CORNER = {
 
 /* ---------- cover ---------- */
 var COVER = {
-  kick: ['技術特輯', 'TECHNIQUE EDITION'],
   h: ['北美匹克球八大核心技術', 'The eight core techniques of pickleball'],
   sub: ['一個技術一頁：原則、已核對的教學影片，以及球場上最常見的盲點與矯正。', 'One technique per page: the principle, lesson videos we checked, and the faults we see most on court.'],
   lede: ['這份指南由 Coach Ninja（NinjaPB Performance Academy 創辦人、RPO Level 1 認證教練）整理。八個技術各占一頁：先講打法的原則，再附上幾支值得看的英文教學影片，最後是球場上最常見的盲點與矯正。', 'Coach Ninja, founder of NinjaPB Performance Academy and an RPO Level 1 certified coach, put this guide together. Each of the eight techniques gets one page: the principle, a few lesson videos worth your time, and the faults we see most often on court.'],
@@ -567,14 +606,14 @@ function cover(){
   var h = '<section class="slide" id="s1"><div class="wrap">';
   h += '<div class="mast"><div class="issueline">' + T(UI.issue) + '</div><h1>The Paddle <i>Review</i></h1></div>';
   h += '<div class="cgrid"><div>';
-  h += '<div class="kicker">' + T(COVER.kick) + '</div><h2 class="h1">' + T(COVER.h) + '</h2><p class="deck">' + T(COVER.sub) + '</p>';
+  h += '<h2 class="h1">' + T(COVER.h) + '</h2><p class="deck">' + T(COVER.sub) + '</p>';
   h += '<p class="lede dropcap">' + T(COVER.lede) + '</p>';
   h += '<div class="sec">' + T(COVER.linesT) + '</div><div class="lines">';
   var rows = MODS.map(function(m, i){ return [m.no, T(m.nav), i + 2]; });
   rows.push(['IX', T(['裝備筆記', 'Gear notes']), MODS.length + 2]);
   rows.push(['X', "Coach's Corner", MODS.length + 3]);
   h += rows.map(function(r){
-    return '<a class="cl" data-go="' + r[2] + '"><i>' + r[0] + '</i><span>' + r[1] + '</span><em>p.' + pad2(r[2]) + '</em></a>';
+    return '<a class="cl" href="#' + r[2] + '" data-go="' + r[2] + '"><i>' + r[0] + '</i><span>' + r[1] + '</span><em>p.' + pad2(r[2]) + '</em></a>';
   }).join('');
   h += '</div></div><div>';
   h += '<div class="card"><h3>' + T(COVER.codeT) + '</h3><div class="codebig">' + CODE + '</div><p>' + T(COVER.codeP) + '</p>' +
@@ -584,7 +623,7 @@ function cover(){
   h += '<div class="card"><h3>' + T(COVER.coachT) + '</h3><p style="margin-top:0;font-size:16px">' + T(COVER.coachP) + '</p>' +
        '<a class="btn pill" href="' + BOOK + '" target="_blank" rel="noopener">' + T(COVER.coachB) + '</a></div>';
   h += '<div class="note"><div class="sec first" style="border:0;margin:0 0 4px;padding:0">' + T(COVER.edT) + '</div><p class="disc">' + T(COVER.ed) + '</p></div>';
-  h += '</div></div></div></section>';
+  h += '</div></div>' + endRow(2, '') + '</div></section>';
   return h;
 }
 
@@ -595,7 +634,7 @@ function vid(v, i){
 }
 function fact(f){
   return '<div class="fact"><b>' + T(f.t) + '</b><p>' + T(f.b) + '</p><div class="src">' +
-    f.s.map(function(s){ return A(s[0], s[1]); }).join(' · ') + '</div></div>';
+    f.s.map(function(s){ return A(s[0], s[1]); }).join('<span aria-hidden="true"> · </span>') + '</div></div>';
 }
 function feature(f){
   return '<div class="feature"><h3>' + T(f.t) + '</h3><ol>' +
@@ -603,8 +642,9 @@ function feature(f){
     '<div class="src">' + T(f.cr) + ' ' + A(f.u, 'YouTube ↗') + '</div></div>';
 }
 function mod(m, i){
-  var h = '<section class="slide" id="s' + (i + 2) + '"><div class="wrap mod"><div>';
-  h += '<div class="kicker">' + T(m.k) + '</div><h2 class="h1">' + T(m.h) + '</h2><p class="deck">' + T(m.deck) + '</p>';
+  var h = '<section class="slide" id="s' + (i + 2) + '"><div class="wrap"><div class="mod"><div>';
+  h += '<h2 class="h1"><span class="hno">' + m.no + '</span> ' + T(m.h) + '</h2><p class="deck">' + T(m.deck) + '</p>';
+  if (m.court) h += courtFig();
   if (m.feature) h += feature(m.feature);
   h += '<div class="sec">' + T(UI.coach) + '</div><ul class="notes">' +
     m.notes.map(function(x){ return '<li><span>—</span><span>' + T(x) + '</span></li>'; }).join('') + '</ul>';
@@ -612,58 +652,110 @@ function mod(m, i){
   h += '</div><div>';
   h += '<div class="sec first">' + T(UI.watch) + '</div>' + m.vids.map(vid).join('');
   if (m.fact) h += fact(m.fact);
-  h += '</div></div></section>';
+  h += '</div></div>';
+  var nav = T(m.nav);
+  h += endRow(i + 3, T(['想讓教練看你的' + nav + '？', 'Want a coach to watch your ' + nav.toLowerCase() + '? ']) +
+    '<a href="' + BOOK + '" target="_blank" rel="noopener">' + T(['雙北小班課，慢動作錄影分析 →', 'Small-group lessons in Greater Taipei, with slow-motion video review →']) + '</a>');
+  h += '</div></section>';
   return h;
 }
 
 function gear(){
   var n = MODS.length + 2;
   var h = '<section class="slide" id="s' + n + '"><div class="wrap">';
-  h += '<div class="kicker">' + T(GEAR.tag) + '</div><h2 class="h1">' + T(GEAR.h) + '</h2><p class="deck">' + T(GEAR.deck) + '</p>';
+  h += '<h2 class="h1">' + T(GEAR.h) + '</h2><p class="deck">' + T(GEAR.deck) + '</p>';
   h += '<div class="gear">';
   h += GEAR.items.map(function(g){
     var s = '<div class="pad"><h3>' + g.n + '</h3><div class="tag">' + T(g.tag) + '</div><dl class="spec">';
     s += g.spec.map(function(r){ return '<dt>' + T(r[0]) + '</dt><dd>' + T(r[1]) + '</dd>'; }).join('');
-    s += '</dl><div class="src">' + g.src.map(function(x){ return A(x[0], x[1]); }).join(' · ') + '</div>';
+    s += '</dl><div class="src">' + g.src.map(function(x){ return A(x[0], x[1]); }).join('<span aria-hidden="true"> · </span>') + '</div>';
     s += codeRow(g.buy) + '</div>';
     return s;
   }).join('');
   h += '</div>';
   h += '<div class="pull">' + T(GEAR.view) + '</div>';
-  h += '<p class="disc" style="margin-top:14px">' + T(GEAR.perk) + '</p>';
+  h += '<p class="disc" style="margin-top:14px">' + T(CORNER.perk) + '</p>';
   h += '<p class="disc" style="margin-top:8px">' + T(CORNER.disc) + '</p>';
-  h += '</div></section>';
+  h += endRow(n + 1, '') + '</div></section>';
   return h;
 }
 
 function corner(){
   var n = MODS.length + 3;
   var h = '<section class="slide dark" id="s' + n + '"><div class="wrap">';
-  h += '<div class="kicker">' + T(CORNER.kick) + '</div><h2 class="h1">' + T(CORNER.h) + '</h2><p class="deck">' + T(CORNER.deck) + '</p>';
+  h += '<h2 class="h1">' + T(CORNER.h) + '</h2><p class="deck">' + T(CORNER.deck) + '</p>';
   h += '<div class="cgrid2"><div>';
+  h += '<div class="sec first">' + T(CORNER.drillsT) + '</div>' +
+    CORNER.drills.map(function(d){ return '<div class="drill"><b>' + T(d[0]) + '</b><p>' + T(d[1]) + '</p></div>'; }).join('');
+  h += '<div class="pull" style="color:#F4F0E7">' + T(CORNER.quote) + '</div><div class="pullby">— Coach Ninja</div>';
+  h += '</div><div>';
   h += '<div class="sec first">' + T(CORNER.priceT) + '</div><div class="price">' +
     CORNER.prices.map(function(p){ return '<div><small>' + T(p[0]) + '</small><strong>' + p[1] + '</strong></div>'; }).join('') + '</div>';
   h += '<p class="disc">' + T(CORNER.priceN) + '</p>';
-  h += '<ul class="plain" style="margin-top:18px">' + CORNER.facts.map(function(f){
+  h += '<ul class="plain" style="margin-top:18px">' + CORNER.facts.slice(0, 5).map(function(f){
     return '<li><span>' + T(f[0]) + '</span><span>' + T(f[1]) + '</span></li>'; }).join('') + '</ul>';
-  h += '<div class="row" style="margin-top:22px"><a class="btn pill" href="' + BOOK + '" target="_blank" rel="noopener">' + T(UI.book) + ' →</a>' +
-    '<a class="btn" href="' + DM + '" target="_blank" rel="noopener">IG DM ↗</a>' +
-    '<a class="btn" href="' + IG + '" target="_blank" rel="noopener">@ninjapbtw ↗</a>' +
-    '<a class="btn" href="' + HAND + '" target="_blank" rel="noopener">' + T(['戰術手冊 ↗', 'Tactics handbook ↗']) + '</a></div>';
-  h += '</div><div>';
-  h += '<div class="sec first">' + T(CORNER.drillsT) + '</div>' +
-    CORNER.drills.map(function(d){ return '<div class="drill"><b>' + T(d[0]) + '</b><p>' + T(d[1]) + '</p></div>'; }).join('');
-  h += '<div class="codewrap"><div class="kicker" style="margin-bottom:6px">' + T(CORNER.perkT) + '</div>' +
-    '<div class="codebig">' + CODE + '</div><p class="disc" style="margin:8px 0 12px;color:#cfc9ba">' + T(CORNER.perk) + '</p>' +
-    '<div class="row"><button class="btn" data-copy="' + CODE + '">' + T(UI.copy) + '</button>' +
-    '<a class="btn" href="' + REF + '" target="_blank" rel="noopener">' + T(COVER.store) + '</a></div></div>';
+  h += '<a class="btn pill big" href="' + BOOK + '" target="_blank" rel="noopener">' + T(UI.book) + ' →</a>';
+  h += '<p class="alt">' + T(['還沒湊齊人？', 'No group yet? ']) + '<a href="' + DM + '" target="_blank" rel="noopener">' +
+    T(['IG 私訊 @ninjapbtw，幫你配對開課 ↗', 'DM @ninjapbtw on Instagram to be matched into a class ↗']) + '</a></p>';
   h += '</div></div>';
-  h += '<div class="pull" style="color:#F4F0E7">' + T(CORNER.quote) + '</div><div class="pullby">— Coach Ninja</div>';
-  h += '<p class="disc" style="margin-top:26px">' + T(CORNER.disc) + '</p>';
+  h += '<p class="disc" style="margin-top:34px">' + T(CORNER.disc2) + '</p>';
   h += '<div class="sec" style="margin-top:30px">' + T(CORNER.srcT) + '</div><div class="srcs">' +
     CORNER.srcs.map(function(s){ return A(s[0], s[1]); }).join('') + '</div>';
   h += '</div></section>';
   return h;
+}
+
+/* ---------- page endings ---------- */
+function endRow(to, invite){
+  if (to > N) return '';
+  var label, num;
+  if (to === 2){ label = T(UI.start); }
+  else if (to <= MODS.length + 1){ label = T(UI.next); }
+  else { label = T(UI.nextPage); }
+  num = to <= MODS.length + 1 ? MODS[to - 2].no : (to === MODS.length + 2 ? 'IX' : 'X');
+  var a = '<a class="nextp" href="#' + to + '" data-go="' + to + '"><span><small>' + label + '</small><strong><i>' + num + '</i> ' + pageName(to) + '</strong></span>' +
+    '<svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 10h13M11.5 5l5 5-5 5"/></svg></a>';
+  return invite ? '<div class="endrow"><p class="invite">' + invite + '</p>' + a + '</div>' : '<div class="endrow solo">' + a + '</div>';
+}
+
+/* ---------- court diagram (dink page) ---------- */
+function courtFig(){
+  var INK = '#161513', RED = '#A3311D', PAPER = '#F4F0E7';
+  var lab = function(x, y, txt, anchor, fill){
+    return '<text x="' + x + '" y="' + y + '" text-anchor="' + (anchor || 'start') + '" dominant-baseline="middle" font-family="IBM Plex Mono, ui-monospace, monospace" font-size="13" fill="' + (fill || INK) +
+      '" stroke="' + PAPER + '" stroke-width="4" stroke-linejoin="round" paint-order="stroke">' + txt + '</text>';
+  };
+  var svg = '<svg class="map" viewBox="0 0 400 420" role="img" aria-labelledby="ctT ctD">' +
+    '<title id="ctT">' + T(['丁克的站位與落點示意圖', 'Diagram: where to stand and where to land the dink']) + '</title>' +
+    '<desc id="ctD">' + T(['俯視網前各 10 呎的球場。你站在左側廚房線後方；對角線丁克從球網中段過網，落進對角的廚房；直線丁克在靠近邊線、較高的網段過網。',
+                          'Top-down view of the 10 feet either side of the net. You stand behind the left kitchen line; the cross-court dink crosses the middle of the net and lands in the diagonal kitchen; the straight dink crosses the higher stretch of net near the sideline.']) + '</desc>' +
+    '<defs><marker id="arR" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1 9 5 0 9z" fill="' + RED + '"/></marker>' +
+    '<marker id="arK" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 1 9 5 0 9z" fill="' + INK + '"/></marker></defs>' +
+    '<rect x="74" y="30" width="252" height="360" fill="#E9E3D3"/>' +
+    '<rect x="20" y="30" width="360" height="360" fill="none" stroke="' + INK + '" stroke-width="1.5"/>' +
+    '<path d="M74 30V390M326 30V390" stroke="' + INK + '" stroke-width="1.5"/>' +
+    '<path d="M20 210H74M326 210H380" stroke="' + INK + '" stroke-width="1"/>' +
+    '<path d="M200 18V402" stroke="' + INK + '" stroke-width="3"/>' +
+    '<circle cx="200" cy="18" r="4" fill="' + INK + '"/><circle cx="200" cy="402" r="4" fill="' + INK + '"/>' +
+    '<path d="M68 304H280" fill="none" stroke="' + INK + '" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#arK)"/>' +
+    '<path d="M68 296 282 120" fill="none" stroke="' + RED + '" stroke-width="2.6" marker-end="url(#arR)"/>' +
+    '<circle cx="56" cy="300" r="9" fill="' + INK + '"/>' +
+    '<circle cx="344" cy="120" r="9" fill="' + PAPER + '" stroke="' + INK + '" stroke-width="1.8"/>' +
+    lab(208, 22, T(['邊線處 36 吋', 'Sideline 36 in'])) +
+    lab(208, 228, T(['中央 34 吋', 'Center 34 in'])) +
+    lab(137, 374, T(['廚房 · 7 呎', 'Kitchen · 7 ft']), 'middle') +
+    lab(263, 374, T(['廚房', 'Kitchen']), 'middle') +
+    lab(56, 324, T(['你', 'You']), 'middle') +
+    lab(344, 96, T(['對手', 'Opponent']), 'middle') +
+    '</svg>';
+  var sw = function(dash, color, w){
+    return '<svg class="sw" viewBox="0 0 34 10" aria-hidden="true"><path d="M2 5H32" stroke="' + color + '" stroke-width="' + w + '"' + (dash ? ' stroke-dasharray="6 5"' : '') + '/></svg>';
+  };
+  return '<figure class="court"><figcaption class="sec first">' + T(['丁克的站位與落點', 'Where to stand, where to land']) + '</figcaption>' + svg +
+    '<ul class="legend"><li>' + sw(false, RED, 2.6) + '<span>' + T(['對角線丁克：從球網中段過網，那裡比邊線處低 2 吋，球的飛行距離也比較長。', 'Cross-court dink: it crosses the middle of the net, 2 inches lower than at the sidelines, and travels farther.']) + '</span></li>' +
+    '<li>' + sw(true, INK, 1.6) + '<span>' + T(['直線丁克：在靠近邊線、較高的網段過網。', 'Straight dink: it crosses the higher stretch of net near the sideline.']) + '</span></li></ul>' +
+    '<p class="src">' + T(['比例依 USA Pickleball 規格：球場寬 20 呎、廚房 7 呎、網高邊線處 36 吋、中央 34 吋；圖中只畫出網前各 10 呎。', 'Drawn to USA Pickleball dimensions: a 20 ft wide court, a 7 ft kitchen, and a net 36 in high at the sidelines and 34 in at the center. Only the 10 ft either side of the net is shown.']) +
+    ' ' + A('https://usapickleball.org/what-is-pickleball/', 'USA Pickleball: what is pickleball') + '</p></figure>';
 }
 
 function toc(){
@@ -671,8 +763,8 @@ function toc(){
   MODS.forEach(function(m, i){ rows.push([m.no, T(m.nav), i + 2]); });
   rows.push(['IX', T(['裝備筆記', 'Gear notes']), MODS.length + 2]);
   rows.push(['X', "Coach's Corner", MODS.length + 3]);
-  return '<button class="btn x" id="tocX">' + T(UI.close) + ' ✕</button><div class="in"><div class="kicker">' + T(UI.toc) + '</div>' +
-    rows.map(function(r){ return '<a data-go="' + r[2] + '"><i>' + r[0] + '</i><span>' + r[1] + '</span><em>p.' + pad2(r[2]) + '</em></a>'; }).join('') + '</div>';
+  return '<button class="btn x" id="tocX">' + T(UI.close) + '</button><div class="in"><h2 class="toch" id="tocH">' + T(UI.toc) + '</h2>' +
+    rows.map(function(r){ return '<a href="#' + r[2] + '" data-go="' + r[2] + '"><i>' + r[0] + '</i><span>' + r[1] + '</span><em>p.' + pad2(r[2]) + '</em></a>'; }).join('') + '</div>';
 }
 
 function pageName(n){
@@ -688,16 +780,20 @@ function render(){
   document.title = 'The Paddle Review · ' + T(['技術特輯', 'Technique Edition']);
   $('issue').textContent = T(UI.issue);
   $('lang').textContent = lang === 'zh' ? 'EN' : '中';
-  $('tocBtn').innerHTML = '<span class="long">' + T(UI.toc) + '</span><span class="short">≡</span>';
+  $('lang').setAttribute('aria-label', T(['切換為英文', 'Switch to Chinese']));
+  $('tocBtn').setAttribute('aria-label', T(UI.toc));
+  $('tocBtn').innerHTML = '<span class="long">' + T(UI.toc) + '</span><span class="short"><svg class="ico" viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 6h13M3.5 10h13M3.5 14h13"/></svg></span>';
+  $('prev').setAttribute('aria-label', T(['上一頁', 'Previous page']));
+  $('next').setAttribute('aria-label', T(['下一頁', 'Next page']));
   $('book').innerHTML = '<span class="long">' + T(UI.book) + '</span><span class="short">' + T(['預約課程', 'Book']) + '</span>';
   var s = cover() + MODS.map(mod).join('') + gear() + corner();
   $('slides').innerHTML = s;
   $('toc').innerHTML = toc();
-  go(cur);
+  go(cur, 'replace');
 }
 
 /* ---------- navigation ---------- */
-function go(n){
+function go(n, how, focusHead){
   n = Math.max(1, Math.min(N, parseInt(n, 10) || 1));
   cur = n;
   var all = document.querySelectorAll('.slide');
@@ -711,8 +807,43 @@ function go(n){
   $('bar').style.width = (n / N * 100) + '%';
   $('prev').disabled = n === 1;
   $('next').disabled = n === N;
-  $('toc').classList.remove('on');
-  try { history.replaceState(null, '', '#' + n); } catch (e) {}
+  closeToc(false);
+  try {
+    if (how === 'replace') history.replaceState(null, '', '#' + n);
+    else if (how !== 'pop' && location.hash !== '#' + n) history.pushState(null, '', '#' + n);
+  } catch (e) {}
+  if (focusHead && el){
+    var hd = el.querySelector('h1, h2');
+    if (hd){ hd.setAttribute('tabindex', '-1'); try { hd.focus({preventScroll: true}); } catch (e) { hd.focus(); } }
+  }
+}
+
+function setInert(on){
+  [document.querySelector('.top'), $('slides'), document.querySelector('.folio')].forEach(function(x){
+    if (!x) return;
+    if (on) x.setAttribute('inert', ''); else x.removeAttribute('inert');
+  });
+}
+function openToc(){
+  var t = $('toc');
+  var links = t.querySelectorAll('a[data-go]');
+  for (var i = 0; i < links.length; i++){
+    if (parseInt(links[i].getAttribute('data-go'), 10) === cur) links[i].setAttribute('aria-current', 'page');
+    else links[i].removeAttribute('aria-current');
+  }
+  t.classList.add('on');
+  $('tocBtn').setAttribute('aria-expanded', 'true');
+  setInert(true);
+  var c = t.querySelector('[aria-current]') || t.querySelector('a, button');
+  if (c) c.focus();
+}
+function closeToc(restore){
+  var t = $('toc');
+  if (!t || !t.classList.contains('on')) return;
+  t.classList.remove('on');
+  $('tocBtn').setAttribute('aria-expanded', 'false');
+  setInert(false);
+  if (restore) $('tocBtn').focus();
 }
 
 function setLang(l){
@@ -742,24 +873,36 @@ function copy(txt, btn){
 document.addEventListener('click', function(e){
   var t = e.target;
   var el = t.closest ? t.closest('[data-go]') : null;
-  if (el){ e.preventDefault(); go(el.getAttribute('data-go')); return; }
+  if (el){ e.preventDefault(); go(el.getAttribute('data-go'), 'push', true); return; }
   el = t.closest ? t.closest('[data-copy]') : null;
   if (el){ copy(el.getAttribute('data-copy'), el); return; }
   if (t.closest && t.closest('#lang')){ setLang(lang === 'zh' ? 'en' : 'zh'); return; }
-  if (t.closest && t.closest('#tocBtn')){ $('toc').classList.add('on'); return; }
-  if (t.closest && t.closest('#tocX')){ $('toc').classList.remove('on'); return; }
-  if (t.closest && t.closest('#prev')){ go(cur - 1); return; }
-  if (t.closest && t.closest('#next')){ go(cur + 1); return; }
+  if (t.closest && t.closest('#tocBtn')){ openToc(); return; }
+  if (t.closest && t.closest('#tocX')){ closeToc(true); return; }
+  if (t.closest && t.closest('#prev')){ go(cur - 1, 'push'); return; }
+  if (t.closest && t.closest('#next')){ go(cur + 1, 'push'); return; }
 });
 document.addEventListener('keydown', function(e){
-  if (e.key === 'ArrowRight') go(cur + 1);
-  else if (e.key === 'ArrowLeft') go(cur - 1);
-  else if (e.key === 'Escape') $('toc').classList.remove('on');
+  if ($('toc').classList.contains('on')){
+    if (e.key === 'Escape'){ e.preventDefault(); closeToc(true); }
+    else if (e.key === 'Tab'){
+      var f = $('toc').querySelectorAll('a[href], button');
+      if (!f.length) return;
+      if (e.shiftKey && document.activeElement === f[0]){ e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && document.activeElement === f[f.length - 1]){ e.preventDefault(); f[0].focus(); }
+    }
+    return;
+  }
+  if (e.altKey || e.ctrlKey || e.metaKey) return;
+  if (e.key === 'ArrowRight') go(cur + 1, 'push');
+  else if (e.key === 'ArrowLeft') go(cur - 1, 'push');
 });
-window.addEventListener('hashchange', function(){
+function fromHash(){
   var n = parseInt((location.hash || '').slice(1), 10);
-  if (n && n !== cur) go(n);
-});
+  if (n && n !== cur) go(n, 'pop', true);
+}
+window.addEventListener('popstate', fromHash);
+window.addEventListener('hashchange', fromHash);
 
 lang = detect();
 render();
